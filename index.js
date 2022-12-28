@@ -12,7 +12,8 @@ const UserRoute = require('./src/Routes/UserRoute')
 const BlogRoute = require('./src/Routes/BlogRoute');
 const { json } = require('body-parser');
 //connection to database 
-mongoose.connect(process.env.MONGO_URL)
+// mongoose.connect(process.env.MONGO_URL)
+mongoose.connect('mongodb+srv://10x-project-group-6:10x-project-group-6@contacts-manager.srkvjrw.mongodb.net/Contacts-Manager')
   .then(() => console.log('database Connected!'))
   .catch((e) => console.log('Error!!! to connect the database' + e.message))
 // MIDDLEWARE
