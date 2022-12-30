@@ -54,7 +54,7 @@ router.post('/login', body('email').isEmail(), body('password').isLength({ min: 
             },'hirak');
             res.json({
                 status:"sucesess",
-                messege: "user sesecss filly login ",
+                messege: "user login sucessfull",
                 token
             })
            }else{
@@ -64,12 +64,12 @@ router.post('/login', body('email').isEmail(), body('password').isLength({ min: 
            }
         }else{
             res.status(400).json({
-                status:'user not register/ derectd to login page ',
+                status:'user not register/ register brfore login',
             })
         }       
     } catch (error) {
         res.json({
-            status: "failsdd",
+            status: "failed",
             messege: error.messege
         })
     }
