@@ -1,22 +1,31 @@
-const express = require('express')
+const express = require('express');
 const mongoose = require('mongoose');
 const app = express()
-const jsw = require('jsonwebtoken')
-const cors = require('cors')
+const jsw = require('jsonwebtoken');
+const cors = require('cors');
 require('dotenv/config');
 // MODELS 
-const UserModel = require ('./src/models/UserModel')
-const Blog = require ('./src/models/Blog')
+// const UserModel = require ('./src/models/UserModel')
+// const Blog = require ('./src/models/Blog')
 //Routes
 const UserRoute = require('./src/Routes/UserRoute')
 const BlogRoute = require('./src/Routes/BlogRoute');
 const { json } = require('body-parser');
+
 //connection to database 
+// mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/api_web_tech_assignment
 // mongoose.connect(process.env.MONGO_URL)
-mongoose.connect('mongodb+srv://10x-project-group-6:10x-project-group-6@contacts-manager.srkvjrw.mongodb.net/Contacts-Manager')
+mongoose.set('strictQuery', false);
+mongoose.connect('mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/test2_2_2023')
   .then(() => console.log('database Connected!'))
   .catch((e) => console.log('Error!!! to connect the database' + e.message))
 // MIDDLEWARE
+
+
+
+
+
+
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(cors())
@@ -30,7 +39,6 @@ const tokenVarification = (req,res,next)=>{
           status:'filed/ login againn'
         })
       }
-
       req.userID = decode.data;
       next();
     })

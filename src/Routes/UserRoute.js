@@ -5,6 +5,8 @@ const { body } = require('express-validator')
 const router = express.Router();
 const userModel = require('../models/UserModel')
 const bodyParser = require('body-parser')
+// const  = require('')
+const malter = require('multer')
 router.use(bodyParser.json())
 // const app = express()
 //REGISTER ROUTE 
@@ -20,7 +22,6 @@ router.post('/register', body('email').isEmail(), body('password').isLength({ mi
         }
         bcrypt.hash(password, 10, async (err, hash) => {
             if (err) return res.status(400).json({ status: " bicript failed" })
-
             userdata = await userModel.create({
                 email: email,
                 password: hash
@@ -42,15 +43,15 @@ router.post('/register', body('email').isEmail(), body('password').isLength({ mi
 router.post('/login', body('email').isEmail(), body('password').isLength({ min: 8 }), async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log(email)
+        // console.log(email)
         let userdata = await userModel.findOne({ email })
         if (userdata) {
            let result = await bcrypt.compare(password, userdata.password);
            if(result){
+            //token
             const token = jsw.sign({
                 exp: Math.floor(Date.now()/1000)+ 60*60,
                 data : userdata._id,
-
             },'hirak');
             res.json({
                 status:"sucesess",
