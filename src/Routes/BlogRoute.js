@@ -21,7 +21,9 @@ const storage = multer.diskStorage({
 const uplode = multer({storage: storage})
 
 router.post('/',uplode.single('image') ,async (req,res)=>{
-    // console.log(req.body)
+    console.log(req.body,'req.body')
+    console.log(req.file,'req.file')
+    console.log(req.files,'req.files')
     console.log(req.file.filename,'req.file.filename')
     try {
         const createBlog = await BlogModel.create({
