@@ -9,22 +9,18 @@ require('dotenv/config');
 // const Blog = require ('./src/models/Blog')
 //Routes
 const UserRoute = require('./src/Routes/UserRoute')
-const BlogRoute = require('./src/Routes/BlogRoute');
+const ToDoRoute = require('./src/Routes/TodoRoute');
+const HistoryRoute = require('./src/Routes/History')
 const { json } = require('body-parser');
 
 //connection to database 
 // mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/api_web_tech_assignment
 // mongoose.connect(process.env.MONGO_URL)
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/test2_2_2023')
+mongoose.connect('mongodb+srv://admin:admin@cluster0.3vq7b6q.mongodb.net/FEB-test2_2_2023')
   .then(() => console.log('database Connected!'))
   .catch((e) => console.log('Error!!! to connect the database' + e.message))
 // MIDDLEWARE
-
-
-
-
-
 
 app.use(express.json())
 app.use(express.urlencoded())
@@ -50,9 +46,10 @@ const tokenVarification = (req,res,next)=>{
   }
 }
 
-
 app.use("/user",UserRoute);
-app.use('/blog',tokenVarification,BlogRoute)
+app.use('/todo',tokenVarification,ToDoRoute)
+app.use('/history',tokenVarification,HistoryRoute)
+
 // app.use("/blog",med,BlogRoute);
 //BAD REQUEST
 app.use('*', (req, res) => {
