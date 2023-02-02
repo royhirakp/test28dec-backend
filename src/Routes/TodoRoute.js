@@ -29,8 +29,8 @@ router.post('/' ,async (req,res)=>{
     }
 })
 // HANDALING THE START POSE END BUTTON OF TODO
-// router.put('/:action/:id', async(req,res)=>{    //PB : NOT WORKING HAVE TO SEE
-router.post('/:action/:id', async(req,res)=>{   // action = status of the todo // id= _id of the todo
+router.put('/:action/:id', async(req,res)=>{    //PB : NOT WORKING HAVE TO SEE
+// router.post('/:action/:id', async(req,res)=>{   // action = status of the todo // id= _id of the todo
         try {
         
         if(req.params.action === 'start'){
