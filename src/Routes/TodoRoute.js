@@ -7,8 +7,6 @@ const TodoModel = require('../models/ToDo')
 const bodyParser = require('body-parser')
 router.use(bodyParser.json())
 
-
-
 router.post('/' ,async (req,res)=>{
     try {
         const Todo = await TodoModel.create({
@@ -32,7 +30,7 @@ router.post('/' ,async (req,res)=>{
 })
 // HANDALING THE START POSE END BUTTON OF TODO
 
-router.post('/:action/:id', async(req,res)=>{   // action = status of the todo // id= _id of the todo
+router.put('/:action/:id', async(req,res)=>{   // action = status of the todo // id= _id of the todo
         try {
         
         if(req.params.action === 'start'){
@@ -45,8 +43,7 @@ router.post('/:action/:id', async(req,res)=>{   // action = status of the todo /
             if(data.Action ==="started"){
                 const time = parseFloat(data.TimeTaken==""?0:data.TimeTaken) + parseInt(req.body.time)
                 const todo = await TodoModel.updateOne({_id: req.params.id},{$set:{Action:'Paused',TimeTaken:time}})
-                console.log(todo)
-                
+                console.log(todo)                
                 return  res.json({todo})
             }else if(data.Action === 'Paused'){
                 const time = parseFloat(data.TimeTaken) + parseInt(req.body.time)
